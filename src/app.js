@@ -4,11 +4,9 @@ import { Provider } from 'react-redux';
 
 import configureStore from './store/configureStore';
 import AppRouter, { history } from './routers/AppRouter';
-
 import { startSetExpenses } from './actions/expenses';
 import { login, logout } from './actions/auth';
 import { firebase } from './firebase/firebase';
-
 import LoadingPage from './components/LoadingPage';
 
 import 'normalize.css/normalize.css';
