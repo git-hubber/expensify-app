@@ -1,12 +1,12 @@
+import moment from 'moment';
+
 import {
   setStartDate,
   setEndDate,
   setTextFilter,
   sortByAmount,
-  sortByDate
+  sortByDate,
 } from '../../actions/filters';
-
-import moment from 'moment';
 
 test('Should generate set startdate action object with provieded date', () => {
   const startDate = moment(1000);
@@ -14,7 +14,7 @@ test('Should generate set startdate action object with provieded date', () => {
 
   expect(action).toEqual({
     type: 'SET_START_DATE',
-    startDate
+    startDate,
   });
 });
 
@@ -24,10 +24,10 @@ test('Should generate set enddate action object with provieded date', () => {
 
   expect(action).toEqual({
     type: 'SET_END_DATE',
-    endDate
+    endDate,
   });
 });
-///////////////////////////////////////////
+
 test('Should generate sortByAmount action object', () => {
   expect(sortByAmount()).toEqual({ type: 'SORT_BY_AMOUNT' });
 });
@@ -41,16 +41,16 @@ test('Should generate setTextFilter action object with default data', () => {
 
   expect(action).toEqual({
     type: 'SET_TEXT_FILTER',
-    text: ''
+    text: '',
   });
 });
 
 test('Should generate setTextFilter action object with provided data', () => {
-  const text = "hello world";
+  const text = 'hello world';
   const action = setTextFilter(text);
 
   expect(action).toEqual({
     type: 'SET_TEXT_FILTER',
-    text
+    text,
   });
 });

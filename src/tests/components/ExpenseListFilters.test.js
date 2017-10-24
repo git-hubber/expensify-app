@@ -3,10 +3,14 @@ import { shallow } from 'enzyme';
 import moment from 'moment';
 
 import { ExpenseListFilters } from '../../components/ExpenseListFilters';
-import expenses from '../fixtures/expenses';
 import { filters, altFilters } from '../fixtures/filters';
 
-let setTextFilter, sortByDate, sortByAmount, setStartDate, setEndDate, wrapper;
+let setTextFilter;
+let sortByDate;
+let sortByAmount;
+let setStartDate;
+let setEndDate;
+let wrapper;
 
 beforeEach(() => {
   setTextFilter = jest.fn();
@@ -15,16 +19,14 @@ beforeEach(() => {
   setStartDate = jest.fn();
   setEndDate = jest.fn();
 
-  wrapper = shallow(
-    <ExpenseListFilters
-      filters={filters}
-      setTextFilter={setTextFilter}
-      sortByDate={sortByDate}
-      sortByAmount={sortByAmount}
-      setStartDate={setStartDate}
-      setEndDate={setEndDate}
-    />
-  );
+  wrapper = shallow(<ExpenseListFilters
+    filters={filters}
+    setTextFilter={setTextFilter}
+    sortByDate={sortByDate}
+    sortByAmount={sortByAmount}
+    setStartDate={setStartDate}
+    setEndDate={setEndDate}
+  />);
 });
 
 test('should render expenseListFilters correctly', () => {
@@ -33,37 +35,36 @@ test('should render expenseListFilters correctly', () => {
 
 test('should render expenseListFilters with alt data correctly', () => {
   wrapper.setProps({
-    filters: altFilters
+    filters: altFilters,
   });
   expect(wrapper).toMatchSnapshot();
 });
 
-
 test('should handle text change', () => {
   const value = 'rent';
   wrapper.find('input').simulate('change', {
-    target: { value }
+    target: { value },
   });
   expect(setTextFilter).toHaveBeenLastCalledWith(value);
 });
 
 test('should handle sort by date', () => {
-  const value ='date';
+  const value = 'date';
 
   wrapper.setProps({
-    filters: altFilters
+    filters: altFilters,
   });
   wrapper.find('select').simulate('change', {
-    target: { value }
+    target: { value },
   });
   expect(sortByDate).toHaveBeenCalled();
 });
 
 test('should handle sort by amount', () => {
-  const value ='amount';
+  const value = 'amount';
 
   wrapper.find('select').simulate('change', {
-    target: { value }
+    target: { value },
   });
   expect(sortByAmount).toHaveBeenCalled();
 });
@@ -83,5 +84,4 @@ test('should handle date focus changes', () => {
   wrapper.find('DateRangePicker').prop('onFocusChange')(calendarFocused);
   expect(wrapper.state('calendarFocused')).toBe(calendarFocused);
 });
-
 
