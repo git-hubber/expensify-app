@@ -10,19 +10,16 @@ export const ExpenseList = (props) => (
       <p>Nothing to see here</p>
     ) : (
       props.expenses.map((expense) =>
-        <ExpenseListItem
+        (<ExpenseListItem
           key={expense.description}
           {...expense}
-        />
-      )
+        />))
     )}
   </div>
 );
 
-const mapStateToProps = (state) => {
-  return {
-    expenses: selectExpenses(state.expenses, state.filters)
-  }
-}
+const mapStateToProps = (state) => ({
+  expenses: selectExpenses(state.expenses, state.filters),
+});
 
 export default connect(mapStateToProps)(ExpenseList);

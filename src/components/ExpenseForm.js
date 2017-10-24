@@ -2,24 +2,18 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { SingleDatePicker } from 'react-dates';
 
-import uuid from 'uuid';
-
-const now = moment();
-
 class ExpenseForm extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
-      id: props.expense ? props.expense.id : uuid(),
       description: props.expense ? props.expense.description : '',
-      amount: props.expense ? (props.expense.amount / 100).toString() : '',
       note: props.expense ? props.expense.note : '',
       amount: props.expense ? props.expense.amount : '',
       createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
       calendarFocused: false,
-      error:  "",
-      buttonText: props.expense ? "Edit Expense" : "Add Expense"
+      error: '',
+      buttonText: props.expense ? 'Edit Expense' : 'Add Expense',
     };
   }
 
@@ -53,16 +47,16 @@ class ExpenseForm extends Component {
   _onFormSubmit = (e) => {
     e.preventDefault();
     if (!this.state.description || !this.state.amount) {
-      this.setState(() => ({ error: "Please be sure to provide the description and amount" }));
+      this.setState(() => ({ error: 'Please be sure to provide the description and amount' }));
     } else {
-      this.setState(() => ({ error: "" }));
+      this.setState(() => ({ error: '' }));
 
       const expense = {
         description: this.state.description,
-        amount: parseFloat(this.state.amount, 10),// * 100,
+        amount: parseFloat(this.state.amount, 10), // * 100,
         createdAt: this.state.createdAt.valueOf(),
-        note: this.state.note
-      }
+        note: this.state.note,
+      };
       this.props.onSubmit(expense);
     }
   }
@@ -71,7 +65,7 @@ class ExpenseForm extends Component {
     return (
       <div>
         <form onSubmit={this._onFormSubmit}>
-        {this.state.error && <p style={{color: 'red'}}>{this.state.error}</p>}
+          {this.state.error && <p style={{ color: 'red' }}>{this.state.error}</p>}
           <input
             type="text"
             placeholder="Description"
@@ -97,12 +91,11 @@ class ExpenseForm extends Component {
             placeholder="Add a note for your expense (optional)"
             value={this.state.note}
             onChange={this._onNoteChange}
-          >
-          </textarea>
+          />
           <button>{this.state.buttonText}</button>
         </form>
       </div>
-    )
+    );
   }
 }
 

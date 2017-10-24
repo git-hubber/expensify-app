@@ -7,12 +7,12 @@ import { startEditExpense, startRemoveExpense } from '../actions/expenses';
 export class EditExpensePage extends Component {
   _onSubmit = (expense) => {
     this.props.startEditExpense(this.props.expense.id, expense);
-    this.props.history.push("/");
+    this.props.history.push('/');
   };
 
   _onRemove = () => {
-    this.props.startRemoveExpense( { id: this.props.expense.id } );
-    this.props.history.push("/");
+    this.props.startRemoveExpense({ id: this.props.expense.id });
+    this.props.history.push('/');
   }
 
   render() {
@@ -27,17 +27,17 @@ export class EditExpensePage extends Component {
           Remove
         </button>
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = ({ expenses }, props) => ({
-  expense: expenses.find((expense) => expense.id === props.match.params.id)
+  expense: expenses.find((expense) => expense.id === props.match.params.id),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   startEditExpense: (id, expense) => dispatch(startEditExpense(id, expense)),
-  startRemoveExpense: (id) => dispatch(startRemoveExpense(id))
+  startRemoveExpense: (id) => dispatch(startRemoveExpense(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditExpensePage);

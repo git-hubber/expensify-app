@@ -2,23 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-import { startLogout } from '../actions/auth'
+import { startLogout } from '../actions/auth';
 
 export const Header = ({ startLogout }) => (
   <header>
     <h1>Expensify</h1>
     <NavLink to="/dashboard" activeClassName="is-active">Home</NavLink> -
     <NavLink to="/create" activeClassName="is-active">Create Expense</NavLink>
-    <button onClick={ startLogout }>LogOut</button>
+    <button onClick={startLogout}>LogOut</button>
   </header>
 );
 
 const mapDispatchToProps = (dispatch) => ({
-  startLogout: () => dispatch(startLogout())
+  startLogout: () => dispatch(startLogout()),
 });
 
-const mapStateToProps = ( { auth }) => {
-  return auth;
-}
+const mapStateToProps = ({ auth }) => auth;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

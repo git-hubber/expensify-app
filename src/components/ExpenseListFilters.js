@@ -6,12 +6,12 @@ import {
   sortByDate,
   sortByAmount,
   setStartDate,
-  setEndDate
+  setEndDate,
 } from '../actions/filters';
 
 export class ExpenseListFilters extends Component {
   state = {
-    calendarFocused: null
+    calendarFocused: null,
   }
 
   _onDatesChange = ({ startDate, endDate }) => {
@@ -28,7 +28,7 @@ export class ExpenseListFilters extends Component {
   }
 
   _onSortChange = (e) => {
-    if (e.target.value === "amount") {
+    if (e.target.value === 'amount') {
       this.props.sortByAmount();
     } else {
       this.props.sortByDate();
@@ -57,7 +57,7 @@ export class ExpenseListFilters extends Component {
           onFocusChange={this._onFocusChange}
           isOutsideRange={() => false}
           numberOfMonths={1}
-          showClearDates={true}
+          showClearDates
         />
       </div>
     );
@@ -71,7 +71,7 @@ const mapDispatchToProps = (dispatch) => ({
   setEndDate: (endDate) => dispatch(setEndDate(endDate)),
   setTextFilter: (text) => dispatch(setTextFilter(text)),
   sortByAmount: () => dispatch(sortByAmount()),
-  sortByDate: () => dispatch(sortByDate())
+  sortByDate: () => dispatch(sortByDate()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpenseListFilters);
